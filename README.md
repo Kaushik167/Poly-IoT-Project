@@ -66,6 +66,10 @@ The system integrates hardware sensing, cloud data visualization, MQTT communica
 - Telegram Bot  
 - MQTT mobile app  
 
+<p align="center">
+  <img src="architecture diagram.png" width="750">
+</p>
+
 ---
 
 ## 🔧 Hardware Components
