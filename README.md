@@ -1,278 +1,231 @@
-🍞 Smart Bakery IoT Monitoring & Control System
+# 🍞 Smart Bakery IoT Monitoring & Control System
 
-An end-to-end Internet of Things (IoT) solution designed for commercial bakery environments where temperature and humidity critically affect product quality. The system provides remote monitoring, real-time alerts, and remote control of environmental conditions using Raspberry Pi, BME280, MQTT, Firebase, and Telegram Bot integration.
+An end-to-end Internet of Things (IoT) solution designed for commercial bakery environments where temperature and humidity critically affect product quality.  
+The system provides **remote monitoring**, **real-time alerts**, and **remote control** of environmental conditions using:
 
-📌 Table of Contents
+- **Raspberry Pi**
+- **BME280 Sensor**
+- **MQTT**
+- **Firebase**
+- **Telegram Bot**
 
-📘 Project Overview
+---
 
-🎯 Objectives
+## 📘 Project Overview
 
-🧱 System Architecture
+Commercial bakeries rely heavily on **stable temperature and humidity** for dough preparation, proofing, and ingredient storage.
 
-🔧 Hardware Components
+This IoT system allows floor managers to:
 
-🧩 Software Components
+- Monitor live environmental conditions remotely  
+- Receive alerts when thresholds are exceeded  
+- Control the air-conditioning system (simulated with a fan)  
+- Access a dashboard from any smart device  
+- View real-time and historical data  
 
-🌐 Features
+The system integrates hardware sensing, cloud data visualization, MQTT communication and user interfaces into one unified IoT solution.
 
-📡 MQTT Topics
+---
 
-🌈 Dashboard (Cloud Layer)
+## 🎯 Objectives
 
-🤖 Telegram Bot Commands
+- ✔ Real-time temperature & humidity monitoring  
+- ✔ Automatic & manual cooling control  
+- ✔ Trigger alerts when temperature exceeds thresholds  
+- ✔ Remote access via web, mobile, MQTT & Telegram  
+- ✔ Historical trend visualisation  
+- ✔ Centralized cloud storage and synchronization  
+- ✔ Multi-platform control and feedback  
+
+---
 
-📊 IoT Data Flow
+## 🧱 System Architecture
 
-⚙️ Raspberry Pi GPIO Map
+### 🏭 **Edge Layer (Physical Bakery Environment)**  
+- Raspberry Pi (edge computing + gateway)  
+- BME280 temperature & humidity sensor  
+- 5V fan (simulated air-conditioning system)  
+- Buzzer (alert system)  
+- LEDs to indicate AUTO / MANUAL control  
 
-🚧 Challenges Faced
+### 📡 **Communication Layer (MQTT)**  
+- Lightweight and fast publish/subscribe model  
+- Sends sensor readings  
+- Receives control commands  
+- Ensures real-time communication between devices and dashboard  
 
-✨ Improvements & Recommended Add-Ons
+### ☁️ **Cloud Layer (Firebase)**  
+- Realtime database for storing:  
+  - Sensor history  
+  - Device status  
+  - Control state  
+- Hosts web dashboard interface  
 
-📎 Links
+### 👤 **User Layer**  
+- Firebase-hosted web dashboard  
+- Telegram Bot  
+- MQTT mobile app  
 
-📘 Project Overview
+---
 
-Commercial bakeries rely heavily on stable temperature and humidity for dough preparation, proofing, and ingredient storage. This IoT system allows floor managers to:
+## 🔧 Hardware Components
 
-Monitor live conditions remotely
+- Raspberry Pi  
+- BME280 Temperature & Humidity Sensor  
+- 5V DC Fan  
+- Active Buzzer  
+- Relay module (for fan control)  
+- White & Red LEDs for mode/status indication  
+- Breadboard + jumper wires  
 
-Receive alerts when thresholds are exceeded
+---
 
-Control air-conditioning systems (simulated with a fan)
+## 🧩 Software Components
 
-Access dashboards from any smart device
+- Python (primary logic running on Raspberry Pi)  
+- MQTT with Mosquitto broker  
+- Paho-MQTT client  
+- Firebase Realtime Database  
+- Firebase Admin SDK  
+- HTML / CSS / JavaScript (dashboard UI)  
+- Chart.js (data visualization)  
+- Telegram Bot API  
 
-View real-time and historical data
+---
 
-The system integrates hardware sensing, communication, cloud data visualization, and user interfaces (web, mobile, Telegram bot) into one unified IoT solution.
+## 🌐 Features
 
-🎯 Objectives
+### 🌡 Real-Time Monitoring  
+- Live temperature & humidity readings  
+- Threshold-based logic for alerts  
+- System uptime monitoring  
+- Online/offline status reporting  
 
-✔ Real-time temperature & humidity monitoring
-✔ Automatic & manual control of cooling system
-✔ Trigger alarms when threshold is exceeded
-✔ Remote access using smart devices
-✔ Data visualization with trends & history
-✔ Cloud-synchronized status and controls
-✔ Multi-platform user interaction (Web, MQTT, Telegram)
+### 🌀 Automated Cooling System  
+- Fan automatically turns on when temperature exceeds threshold  
+- Buzzer triggers during high-temperature events  
+- Both components support **Manual** and **Auto** modes  
 
-🧱 System Architecture
-🏭 Edge Layer (Physical Bakery Environment)
+### 📱 Multi-Platform Control  
+- Web dashboard  
+- Telegram bot commands  
+- MQTT app remote controls  
 
-Raspberry Pi (edge computing + gateway)
+### 📊 Data Visualization  
+- Real-time temperature & humidity graphs  
+- Historical data stored in Firebase  
+- Dynamic, auto-updating charts  
 
-BME280 Temperature & Humidity Sensor
+### 🛡 User Authentication  
+- Username/password login  
+- Password reset functionality  
+- Persistent login sessions  
 
-Fan (simulated air-conditioning system)
+---
 
-Buzzer (alert system)
+## 📡 MQTT Topics
 
-Status LEDs for AUTO / MANUAL modes
+**Published by Raspberry Pi**
+- `sensor/bme280` – Temperature & humidity  
+- `status/fan` – Fan ON/OFF  
+- `status/buzzer` – Buzzer ON/OFF  
+- `status/threshold` – Current threshold  
+- `status/uptime` – System uptime  
+- `status/availability` – Online/offline  
 
-📡 Communication Layer
+**Received by Raspberry Pi**
+- `control/fan` – ON / OFF / AUTO  
+- `control/buzzer` – ON / OFF / AUTO  
+- `config/threshold` – Update temperature threshold  
 
-MQTT protocol for lightweight messaging
+---
 
-Publishes sensor data
+## 🌈 Dashboard (Cloud Layer)
 
-Subscribes to control commands
+The Firebase dashboard provides:
 
-Topic-based communication for scalability
+- ✔ Live temperature & humidity  
+- ✔ Fan & Buzzer status  
+- ✔ Control buttons: ON / OFF / AUTO  
+- ✔ Login, Signup & Password Reset  
+- ✔ Real-time graphs using Chart.js  
+- ✔ Full history view  
 
-☁️ Cloud Layer
+Fully responsive for both mobile & desktop.
 
-Firebase Realtime Database
+---
 
-Stores live data, history, controls, system status
+## 🤖 Telegram Bot Commands
 
-Hosts web dashboard
+| Command | Function |
+|--------|----------|
+| `/start` | Show help message |
+| `/status` | Shows current temp, humidity, fan & buzzer mode |
+| `/fan on/off/auto` | Control the fan |
+| `/buzzer on/off/auto` | Control the buzzer |
+| `/threshold <value>` | Change temperature threshold |
 
-👤 User Layer
+---
 
-Firebase web dashboard
+## 📊 IoT Data Flow
 
-MQTT mobile apps
+1. BME280 collects sensor data  
+2. Raspberry Pi processes & publishes via MQTT  
+3. Data stored in Firebase  
+4. Dashboard retrieves and visualises data  
+5. User sends commands via Web/MQTT/Telegram  
+6. Pi executes commands (fan, buzzer, threshold)  
 
-Telegram Bot for remote commands
+---
 
-Real-time control panel + graph analytics
+## ⚙️ Raspberry Pi GPIO Map
 
-🔧 Hardware Components
+| Component | GPIO Pin | Mode | Description |
+|----------|----------|------|-------------|
+| BME280 SDA | GPIO 2 | Input | I²C Data |
+| BME280 SCL | GPIO 3 | Input | I²C Clock |
+| Fan (Relay) | GPIO 18 | Output | Controls fan |
+| Buzzer | GPIO 17 | Output | Alarm |
+| White LED | GPIO 27 | Output | Fan Auto/Manual Indicator |
+| Red LED | GPIO 22 | Output | Buzzer Auto/Manual Indicator |
 
-Raspberry Pi (main controller & gateway)
+---
 
-BME280 Sensor (temperature & humidity)
+## 🚧 Challenges Faced
 
-5V Fan (simulated cooling system)
+### 🔹 Sensor Misreadings  
+Solved with shorter wiring and stable power.
 
-Active Buzzer (alarms)
+### 🔹 GPIO Conflicts  
+Prevented using a pin assignment table.
 
-Relay Module (fan control)
+### 🔹 MQTT Connection Drops  
+Added reconnection + buffering logic.
 
-LED Indicators (manual/auto modes)
+### 🔹 Topic Naming Mistakes  
+Standardized topics using configuration constants.
 
-Jumper wires + breadboard
+### 🔹 Unstable Threshold Behaviour  
+Implemented calibration + remote adjustable slider.
 
-🧩 Software Components
+---
 
-Python (Raspberry Pi logic)
+## ✨ Improvements & Recommended Add-Ons
 
-MQTT (Mosquitto broker)
+- Temperature prediction using ML  
+- Email/SMS alert integration  
+- Daily PDF report generation  
+- React-based improved dashboard  
+- Additional sensors (CO₂, motion, airflow)  
+- Node-RED for graphical flow automation  
+- Migration to HTTPS + secure auth  
 
-Firebase Realtime Database
+---
 
-HTML/CSS/JS Dashboard
+## 📎 Links
 
-Chart.js for graphs
-
-Telegram Bot API
-
-Paho-MQTT for messaging
-
-Firebase Admin SDK
-
-🌐 Features
-🌡 Real-Time Monitoring
-
-Live temperature & humidity readings
-
-Automatic threshold-based decisions
-
-Uptime monitoring
-
-Online/offline status reporting
-
-🌀 Automated Cooling System
-
-Fan turns ON when temperature exceeds threshold
-
-Buzzer activates for high-temp alerts
-
-Both can be switched to manual override
-
-📱 Multi-Platform Control
-
-Web dashboard for live control
-
-Telegram bot commands
-
-MQTT app manual overrides
-
-📊 Data Visualization
-
-Real-time graph plotting
-
-Historical dataset (timestamped)
-
-Dynamic charts for temp & humidity
-
-🛡 User Authentication
-
-Username/password login
-
-Password reset
-
-Persistent sessions
-
-📡 MQTT Topics
-Topic	Direction	Description
-sensor/bme280	Pi → Broker	Publishes temperature & humidity
-status/fan	Pi → Broker	Fan ON/OFF status
-status/buzzer	Pi → Broker	Buzzer ON/OFF status
-control/fan	User → Pi	Manual/Auto fan overwrite
-control/buzzer	User → Pi	Manual/Auto buzzer overwrite
-config/threshold	User → Pi	Update temperature threshold
-status/threshold	Pi → Broker	Current threshold value
-status/uptime	Pi → Broker	System uptime
-status/availability	Pi → Broker	online/offline
-🌈 Dashboard (Cloud Layer)
-
-The Firebase web app includes:
-
-✔ Live sensor data
-✔ Fan & buzzer control buttons
-✔ Auto/manual switching
-✔ Temperature & humidity charts
-✔ Login / Signup / Password reset
-✔ Historical data plotting
-
-Fully responsive for mobile & desktop.
-
-🤖 Telegram Bot Commands
-Command	Function
-/start	Show command help
-/status	Display live temp, humidity & system status
-/fan on/off/auto	Manually control the fan
-/buzzer on/off/auto	Control the buzzer
-/threshold <value>	Set temperature threshold
-📊 IoT Data Flow
-
-Sensor captures data
-
-Raspberry Pi processes and publishes via MQTT
-
-Data is stored in Firebase
-
-Dashboard retrieves and displays data
-
-User sends commands (Web/MQTT/Telegram)
-
-Cloud relays control instructions
-
-Raspberry Pi executes the command (fan/buzzer)
-
-⚙️ Raspberry Pi GPIO Map
-Component	Pin	Direction	Description
-BME280 SDA	GPIO 2	Input	I2C Data
-BME280 SCL	GPIO 3	Input	I2C Clock
-Fan (Relay)	GPIO 18	Output	Controls AC/Fan
-Buzzer	GPIO 17	Output	Alarm
-White LED	GPIO 27	Output	Fan Auto/Manual Indicator
-Red LED	GPIO 22	Output	Buzzer Auto/Manual Indicator
-🚧 Challenges Faced
-🔹 Sensor Misreadings
-
-Fixed with shorter wiring + secure connections.
-
-🔹 GPIO Conflicts
-
-Resolved using a pin assignment table.
-
-🔹 MQTT Connection Loss
-
-Added reconnection logic & buffering.
-
-🔹 Topic Mismatches
-
-Used centralized config + testing.
-
-🔹 Unstable thresholds
-
-Implemented calibration & remote slider-based adjustment.
-
-✨ Improvements & Recommended Add-Ons
-
-Add predictive analytics (forecasting temp spikes)
-
-Implement email/SMS alerts
-
-Automate daily reports (PDFs)
-
-Upgrade dashboard UI using React
-
-Add more sensors (CO₂, airflow, motion)
-
-Use Node-RED for visual flow programming
-
-Migrate to HTTPS + strengthened auth
-
-📎 Links
-🌐 Web Dashboard
-
+### 🌐 Web Dashboard  
 https://smart-bakery-bc347.web.app/
 
-🤖 Telegram Bot
-
+### 🤖 Telegram Bot  
 https://t.me/IOTP_smartbakery_bot
